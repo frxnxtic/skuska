@@ -32,12 +32,13 @@ services:
 
   postgres:
     image: postgres:latest
+    container_name: psql
     environment:
       POSTGRES_DB: quizdb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - '5432:5432'
+      - '5431:5432'
 
   quiz-spring:
     build: .
@@ -50,7 +51,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/quizdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://psql:5432/quizdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
